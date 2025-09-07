@@ -1,0 +1,36 @@
+
+pair<int, int> firstAndLastPosition(vector<int>& arr, int n, int k)
+{
+    pair<int,int> P;
+    int start=0;
+    int end=n-1;
+    int first=-1;
+    int last=-1;
+    while(start<=end){
+        int mid=start+(end-start)/2;
+        if(arr[mid]==k){
+            first=mid;
+            last=mid;
+            while(first>=0 && arr[first]==k){
+                first--;
+            }
+            while(last<n && arr[last]==k){
+                last++;
+            }
+            first++;
+            last--;
+            break;
+        }
+        else if(arr[mid]<k){
+            start=mid+1;
+        }
+        else{
+            end=mid-1;
+        }
+    }
+    
+    P.first=first;
+    P.second=last;
+    
+    return P;
+}

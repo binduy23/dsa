@@ -1,0 +1,44 @@
+//  https://bit.ly/3DfQW0s
+
+
+#include <bits/stdc++.h> 
+void sort012(int *arr, int n)
+{
+    int size=n;
+   int start=0;
+    int end=size-1;
+    while(start<=end){
+        
+        while(arr[start]==0){
+            start++;
+        }
+        while(arr[end]!=0){
+            end--;
+        }
+        if(start<end){
+        swap(arr[start],arr[end]);
+        start++;
+        end--;
+        }
+    }
+    start=0;
+    while(arr[start]==0){
+        start++;
+    }
+    end=size-1;
+    while(start<=end){
+        
+        while(arr[start]==1){
+            start++;
+        }
+        while(arr[end]==2){
+            end--;
+        }
+        if(start<end){
+        swap(arr[start],arr[end]);
+        start++;
+        end--;
+        }
+    }
+    
+}

@@ -1,0 +1,42 @@
+// https://www.naukri.com/code360/problems/check-if-the-string-is-a-palindrome_1062633?utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_5&leftPanelTabValue=SUBMISSION
+
+#include <bits/stdc++.h> 
+
+void ideal(string &s){
+    for(int i=0;i<s.size();i++){
+        if(s[i]>='A' && s[i]<='Z'){
+            s[i]=s[i]+32;
+        }
+        else if(s[i]>='a' && s[i]<='z'){
+            
+        }
+        else if(s[i]>=48 && s[i]<=57){
+
+        }
+        else{
+            s[i]='*';
+        }
+    }
+}
+bool checkPalindrome(string s)
+{
+    // Write your code here.
+    ideal(s);
+    
+    int start=0;
+    int end=s.size()-1;
+    while(start<end){
+        while(s[start]=='*'){
+            start++;
+        }
+        while(s[end]=='*'){
+            end--;
+        }
+        if(s[start]!=s[end]){
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}

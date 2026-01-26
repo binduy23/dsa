@@ -1,0 +1,25 @@
+//https://www.naukri.com/code360/problems/binary-search_972?leftPanelTab=0&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_11&leftPanelTabValue=SUBMISSION
+
+int search(vector<int> &nums, int target,int start=0,int end=0,int loop=0) {
+    // Write your code here.
+    if(loop==0){
+        end=nums.size()-1;
+    }
+    if(start>end){
+        return -1;
+    }
+    int mid=start+(end-start)/2;
+   
+    if(nums[mid]==target){
+        
+        return mid;
+    }
+    else if(nums[mid]<target){
+        search(nums,target,mid+1,end,1);
+        
+    }
+    else{
+        search(nums,target,start,mid-1,1);
+    }
+
+}

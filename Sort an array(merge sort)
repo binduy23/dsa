@@ -1,0 +1,51 @@
+//https://leetcode.com/problems/sort-an-array/submissions/1898520240
+
+class Solution {
+private:
+    void merge(vector<int>& nums,int s,int e,int mid){
+        int first=mid-s+1;
+        int second=e-mid;
+        int *arr1=new int[first];
+        int *arr2=new int[second];
+        
+        for(int i=0;i<first;i++){
+            arr1[i]=nums[s+i];
+        }
+        for(int i=0;i<second;i++){
+            arr2[i]=nums[mid+1+i];
+        }
+        int i=0;
+        int j=0;
+        int index=s;
+        while(i<first && j<second){
+            if(arr1[i]<arr2[j]){
+                nums[index++]=arr1[i++];
+            }
+            else{
+                nums[index++]=arr2[j++];
+            }
+        }
+        while(i<first){
+            nums[index++]=arr1[i++];
+        }
+        while(j<second){
+            nums[index++]=arr2[j++];
+        }
+        
+    }
+    
+    void mergesort(vector<int>& nums,int s,int e){
+        if(s>=e){
+            return;
+        }
+        int mid=s+(e-s)/2;
+        mergesort(nums,s,mid);
+        mergesort(nums,mid+1,e);
+        merge(nums,s,e,mid);
+    }
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        mergesort(nums,0,nums.size()-1);
+        return nums;
+    }
+};

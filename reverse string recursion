@@ -1,0 +1,13 @@
+//https://www.naukri.com/code360/problems/reverse-the-string_799927?leftPanelTab=0&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_13&leftPanelTabValue=SUBMISSION
+
+#include <bits/stdc++.h> 
+string reverseString(string &str,int i=0)
+{
+	// Write your code here.
+	int n=str.length();
+	if(i>=n/2){
+		return str;
+	}
+	swap(str[i],str[n-i-1]);
+	return reverseString(str,i+1);
+}

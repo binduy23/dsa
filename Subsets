@@ -1,0 +1,27 @@
+// https://leetcode.com/problems/subsets/submissions/1900102031
+
+class Solution {
+private:
+    void getSet(vector<vector<int>>& ans,vector<int>& nums,vector<int> output,int index){
+        if(index>=nums.size()){
+            ans.push_back(output);
+            return;
+        }
+        int element=nums[index];
+        getSet(ans,nums,output,index+1);
+        
+    output.push_back(element);
+            getSet(ans,nums,output,index+1);
+        
+        
+    }
+public:
+    vector<vector<int>> subsets(vector<int>& nums) {
+
+        vector<vector<int>> ans;
+        vector<int> output;
+        int index=0;
+        getSet(ans,nums,output,index);
+        return ans;
+    }
+};

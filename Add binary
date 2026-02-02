@@ -1,0 +1,31 @@
+// https://leetcode.com/problems/add-binary/submissions/1905829352
+
+class Solution {
+private:
+    void reverse(string &ans){
+        int s=0;
+        int e=ans.length()-1;
+        while(s<e){
+            swap(ans[s++], ans[e--]);
+        }
+    }
+public:
+    string addBinary(string a, string b) {
+        int i = a.length() - 1;
+        int j = b.length() - 1;
+        int carry = 0;
+        string ans = "";
+
+        while(i >= 0 || j >= 0 || carry){
+            int sum = carry;
+            if(i >= 0) sum += a[i--] - '0';  // convert char to int
+            if(j >= 0) sum += b[j--] - '0';
+
+            ans.push_back((sum % 2) + '0');  // result bit as char
+            carry = sum / 2;                 // update carry
+        }
+
+        reverse(ans);
+        return ans;
+    }
+};

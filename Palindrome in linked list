@@ -1,0 +1,67 @@
+// https://leetcode.com/problems/palindrome-linked-list/submissions/1908337677
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+private:
+    ListNode* find_mid(ListNode* head){
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL){
+            
+            fast=fast->next;
+            if(fast!=NULL && fast->next!=NULL){
+                fast=fast->next;
+                slow=slow->next;
+            }
+            else{
+                return slow;
+            }
+            
+        }
+        return slow;
+    }
+    ListNode* get_next(ListNode* start){
+        if(start->next==NULL){
+            return start;
+        }
+        ListNode* prev=NULL;
+        ListNode* frwrd=start->next;
+        while(start!=NULL){
+            start->next=prev;
+            prev=start;
+            start=frwrd;
+            if(frwrd!=NULL)
+                frwrd=start->next;
+        }
+        return prev;
+    }
+public:
+    bool isPalindrome(ListNode* head) {
+        if(head->next==NULL){
+            return true;
+        }
+        ListNode* mid=find_mid(head);
+        ListNode* end=head;
+        
+        mid->next=get_next(mid->next);
+         ListNode* list2=mid->next;
+         ListNode* list1=head;
+        while(list2!=NULL){
+            if(list1->val!=list2->val){
+                return false;
+            }
+            list1=list1->next;
+            list2=list2->next;
+        }
+        return true;
+    }
+};

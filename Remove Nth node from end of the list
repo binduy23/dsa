@@ -1,0 +1,56 @@
+// https://leetcode.com/problems/remove-nth-node-from-end-of-list/submissions/1914829146
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+private:
+    void reverse(ListNode* &head){
+        ListNode* curr=head;
+        ListNode* prev=NULL;
+        while(curr!=NULL){
+            ListNode* frwrd=curr->next;
+           
+            curr->next=prev;
+            prev=curr;
+            curr=frwrd;
+        }
+        head=prev;
+    }
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        if(head==NULL){
+            return head;
+        }
+        reverse(head);
+        if(n==1){
+            ListNode* temp=head;
+            head=head->next;
+            temp->next=NULL;
+            reverse(head);
+            return head;
+        }
+        int count=1;
+        ListNode* curr=head;
+        ListNode* prev=NULL;
+        while(count<n){
+            prev=curr;
+            curr=curr->next;
+            count++;
+        }
+        if(prev==NULL){
+            return NULL;
+        }
+        prev->next=curr->next;
+        curr->next=NULL;
+        reverse(head);
+        return head;
+    }
+};

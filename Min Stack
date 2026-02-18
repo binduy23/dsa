@@ -1,0 +1,44 @@
+// https://leetcode.com/problems/min-stack/submissions/1923505607
+
+class MinStack {
+private:
+    stack<int> mainStack;
+    stack<int> minStack;
+public:
+    MinStack() {
+        
+    }
+    
+    void push(int val) {
+        mainStack.push(val);
+    }
+    
+    void pop() {
+        mainStack.pop();
+    }
+    
+    int top() {
+        return mainStack.top();
+    }
+    
+    int getMin() {
+        minStack=mainStack;
+        int ans=INT_MAX;
+        while(!minStack.empty()){
+            if(ans>minStack.top()){
+                ans=minStack.top();
+            }
+            minStack.pop();
+        }
+        return ans;
+    }
+};
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */

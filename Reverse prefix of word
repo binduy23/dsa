@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/reverse-prefix-of-word/submissions/1923425427
+
+
+class Solution {
+public:
+    string reversePrefix(string word, char ch) {
+        stack<char> temp;
+        int i=0;
+        while(i<word.length() && word[i]!=ch){
+            temp.push(word[i]);
+            i++;
+        }
+        if(i==word.length()){
+            return word;
+        }
+        temp.push(word[i++]);
+        string ans="";
+        while(!temp.empty()){
+            ans=ans+temp.top();
+            temp.pop();
+        }
+        while(i<word.length()){
+            ans=ans+word[i];
+            i++;
+        }
+        return ans;
+    }
+};

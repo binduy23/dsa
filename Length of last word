@@ -1,0 +1,20 @@
+// https://leetcode.com/problems/length-of-last-word/submissions/1924665126
+
+class Solution {
+public:
+    int lengthOfLastWord(string s) {
+        int l=s.length()-1;
+        int length=s.length();
+        while(l>=0 && s[l]==' '){
+            l--;
+            length--;
+        }
+        while(l>=0 && s[l]!=' '){
+            l--;
+        }
+        if(l<0){
+            return length;
+        }
+        return length-l-1;
+    }
+};

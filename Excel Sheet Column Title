@@ -1,0 +1,23 @@
+// https://leetcode.com/problems/excel-sheet-column-title/submissions/1928837782
+
+class Solution {
+private:
+    string convert(int columnNumber,string &str){
+        if(columnNumber<=0){
+            return str;
+        }
+        int nextColumnNum=(columnNumber-1)/26;
+        int chNum=(columnNumber-1)%26;
+        convert(nextColumnNum,str);
+        char ch='A'+chNum;
+        str=str+ch;
+        return str;
+    }
+public:
+    string convertToTitle(int columnNumber) {
+        string str="";
+        convert(columnNumber,str);
+        return str;
+
+    }
+};

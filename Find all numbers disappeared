@@ -1,0 +1,29 @@
+// https://leetcode.com/problems/find-all-numbers-disappeared-in-an-array/submissions/1929960939
+
+class Solution {
+public:
+    vector<int> findDisappearedNumbers(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        vector<int> ans;
+        int curr=1;
+        int i=0;
+        while(i<nums.size()){
+            if(nums[i]==curr){
+                curr++;
+                i++;
+            }
+            else if(nums[i]<curr){
+                i++;
+            }
+            else{
+                ans.push_back(curr);
+                curr++;
+            }
+        }
+        while(curr<=nums.size()){
+            ans.push_back(curr);
+            curr++;
+        }
+        return ans;
+    }
+};

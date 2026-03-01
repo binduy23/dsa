@@ -1,0 +1,21 @@
+// https://leetcode.com/problems/valid-anagram/submissions/1934890463
+
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        char temp[256];
+        for(int i=0;i<s.size();i++){
+            int index=s[i]-'0';
+            char ch=s[i];
+            if(temp[index]=='\0'){
+                temp[index]=t[i];
+            }
+            else{
+                if(temp[index]!=t[i]){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};

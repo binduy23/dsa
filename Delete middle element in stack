@@ -1,0 +1,16 @@
+// https://bit.ly/3ovTIu2
+
+#include <bits/stdc++.h> 
+void deleteMiddle(stack<int>&inputStack, int N){
+   // Write your code here
+   int n=(N%2==0?(N/2+1):(N/2+2));
+   if(inputStack.size()==n){
+      inputStack.pop();
+      return;
+   }
+   int val=inputStack.top();
+   inputStack.pop();
+   deleteMiddle(inputStack,N);
+   inputStack.push(val);
+   
+}

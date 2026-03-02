@@ -1,0 +1,19 @@
+// https://leetcode.com/problems/first-unique-character-in-a-string/submissions/1935859200
+
+class Solution {
+public:
+    int firstUniqChar(string s) {
+        int arr[26];
+        for(int i=0;i<s.length();i++){
+            int index=s[i]-'a';
+            arr[index]++;
+        }
+        for(int i=0;i<s.length();i++){
+            int index=s[i]-'a';
+            if(arr[index]==1){
+                return i;
+            }
+        }
+        return -1;
+    }
+};

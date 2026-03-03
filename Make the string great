@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/make-the-string-great/submissions/1936529225
+
+class Solution {
+public:
+    string makeGood(string s) {
+        int i=0;
+        while(i<s.length()){
+            cout<<s<<endl;
+            if(i>0 && (s[i-1]-s[i]-32==0 || s[i-1]-s[i]+32==0)){
+                s.erase(i-1,2);
+                if(i>=2){
+                    i=i-2;
+                }
+                else{
+                    i=0;
+                }
+
+            }
+            else{
+                i++;
+            }
+        }
+        return s;
+    }
+};

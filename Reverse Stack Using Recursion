@@ -1,0 +1,24 @@
+// https://bit.ly/3HCBnD4
+
+void insertAtBottom(stack<int> &myStack,int x){
+    if(myStack.size()==0){
+        myStack.push(x);
+        return;
+    }
+    int val=myStack.top();
+    myStack.pop();
+    insertAtBottom(myStack,x);
+    myStack.push(val);
+    return;
+}
+void reverseStack(stack<int> &stack) {
+    // Write your code here
+    if(stack.size()==0){
+        return;
+    }
+    int val=stack.top();
+    stack.pop();
+    reverseStack(stack);
+    insertAtBottom(stack,val);
+    return;
+}

@@ -1,0 +1,26 @@
+// https://bit.ly/3snpr1B
+
+#include <bits/stdc++.h> 
+void sortedStack(stack<int> &myStack,int x){
+    if(myStack.size()==0 || myStack.top()<=x){
+        myStack.push(x);
+        return;
+    }
+    int val=myStack.top();
+    myStack.pop();
+    sortedStack(myStack,x);
+    sortedStack(myStack,val);
+    return;
+}
+void sortStack(stack<int> &stack)
+{
+	// Write your code here
+	if(stack.size()==0){
+        return;
+    }
+    int val=stack.top();
+    stack.pop();
+    sortStack(stack);
+    sortedStack(stack,val);
+
+}

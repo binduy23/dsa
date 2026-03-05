@@ -1,0 +1,41 @@
+// https://www.geeksforgeeks.org/problems/determine-if-two-trees-are-identical/1
+
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int x) {
+        data = x;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+    bool isIdentical(Node* r1, Node* r2) {
+        // code here
+        
+        if(r1==NULL && r2==NULL){
+            return true;
+        }
+        else if(r1!=NULL && r2==NULL){
+            return false;
+        }
+        else if(r1==NULL && r2!=NULL){
+            return false;
+        }
+        bool l=isIdentical(r1->left,r2->left);
+        bool r=isIdentical(r1->right,r2->right);
+        if(r1->data==r2->data && l && r){
+            return true;
+        }
+        else{
+            return false;
+        }
+        
+    }
+};

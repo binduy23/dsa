@@ -1,0 +1,27 @@
+// https://www.geeksforgeeks.org/problems/height-of-binary-tree/1
+
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int val) {
+        data = val;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  public:
+    int height(Node* root) {
+        // code here
+        if(root==NULL || (root->left==NULL & root->right==NULL)){
+            return 0;
+        }
+        int h=1+max(height(root->left),height(root->right));
+        return h;
+    }
+};

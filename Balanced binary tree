@@ -1,0 +1,47 @@
+// https://leetcode.com/problems/balanced-binary-tree/submissions/1945307382
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+private:
+    pair<int,bool> getAns(TreeNode* root){
+        if(root==NULL){
+            pair<int, bool> p = make_pair(0, true);
+            return p;
+        }
+        if(root->left==NULL && root->right==NULL){
+            pair<int, bool> p = make_pair(1, true);
+            return p;
+        }
+        pair<int,bool> left=getAns(root->left);
+        pair<int,bool> right=getAns(root->right);
+        int diff=left.first-right.first;
+        int height=max(left.first,right.first)+1;
+        if(left.second && right.second && (diff>-2 && diff<2)){
+            pair<int, bool> p =make_pair(height,true);
+            return p;
+        }
+        else{
+            pair<int, bool> p =make_pair(height,false);
+            return p;
+        }
+
+    }
+public:
+    bool isBalanced(TreeNode* root) {
+        if(root==NULL){
+            return true;
+        }
+        pair<int,bool> ans=getAns(root);
+        return ans.second;
+    }
+};

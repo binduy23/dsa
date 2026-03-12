@@ -1,0 +1,52 @@
+// https://www.geeksforgeeks.org/problems/sum-of-the-longest-bloodline-of-a-tree/1
+
+/*
+class Node {
+  public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int x) {
+        data = x;
+        left = NULL;
+        right = NULL;
+    }
+}; */
+
+class Solution {
+  private:
+    pair<int,int> getAns(Node* root){
+        if(root==NULL){
+            pair<int,int> p=make_pair(0,0);
+            return p;
+        }
+        if(root->left==NULL && root->right==NULL){
+            pair<int,int> p=make_pair(1,root->data);
+            return p;
+        }
+        pair<int,int> l=getAns(root->left);
+        pair<int,int> r=getAns(root->right);
+        
+        pair<int,int> max;
+        if(l.first>r.first){
+            max=l;
+        }
+        else if(l.first==r.first){
+            max=(l.second>r.second)?l:r;
+        }
+        else{
+            max=r;
+        }
+        int height=max.first+1;
+        int sum=max.second+root->data;
+        pair<int,int> ans=make_pair(height,sum);
+        return ans;
+    }
+  public:
+    int sumOfLongRootToLeafPath(Node *root) {
+        // code here
+        pair<int,int> ans=getAns(root);
+        return ans.second;
+    }
+};

@@ -1,0 +1,42 @@
+// https://www.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1
+
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int x) {
+        data = x;
+        left = right = NULL;
+    }
+};
+*/
+
+class Solution {
+  private:
+    bool getAns(Node* root, int n1, int n2,Node* &ans){
+        if(root==NULL){
+            return false;
+        }
+        bool l=getAns(root->left,n1,n2,ans);
+        bool r=getAns(root->right,n1,n2,ans);
+        bool p=false;
+        if(root->data==n1 || root->data==n2){
+            p=true;
+        } 
+        if(((l || r) && p) || (l && r)){
+            ans=root;
+            return true;
+        }
+        return l || r || p;
+    }
+  public:
+    Node* lca(Node* root, int n1, int n2) {
+        //  code here
+        Node* ans=nullptr;
+        bool t=getAns(root,n1,n2,ans);
+        return ans;
+    }
+};

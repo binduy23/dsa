@@ -1,0 +1,47 @@
+// https://www.geeksforgeeks.org/problems/tree-from-postorder-and-inorder/1
+
+/*
+class Node {
+public:
+    int data;
+    Node* left;
+    Node* right;
+
+    Node(int x) {
+        data = x;
+        left = right = nullptr;
+    }
+};
+*/
+
+class Solution {
+  private:
+    Node* build(vector<int> &inorder, vector<int> &postorder,int start,int end,int& i){
+        if(i<0){
+            return NULL;
+        }
+        if(start>end){
+            return NULL;
+        }
+        int element=postorder[i--];
+        Node* root=new Node(element);
+        int mid=-1;
+        for(int j=start;j<=end;j++){
+            if(inorder[j]==element){
+                mid=j;                                                                                                                       
+            }
+        }
+        if(mid==-1){
+            return NULL;
+        }
+        root->right=build(inorder,postorder,mid+1,end,i);
+        root->left=build(inorder,postorder,start,mid-1,i);
+        return root;
+    }
+  public:
+    Node *buildTree(vector<int> &inorder, vector<int> &postorder) {
+        // code here
+        int i=postorder.size()-1;
+        return build(inorder,postorder,0,inorder.size()-1,i);
+    }
+};

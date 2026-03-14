@@ -1,0 +1,49 @@
+// https://www.geeksforgeeks.org/problems/construct-tree-1/1
+
+/*
+class Node {
+public:
+    int data;
+    Node *left;
+    Node *right;
+
+    Node(int x) {
+        data = x;
+        left = NULL;
+        right = NULL;
+    }
+};
+*/
+
+class Solution {
+  private:
+    Node* build(vector<int> &inorder, vector<int> &preorder,int start,int end,int& i){
+        if(i>=preorder.size()){
+            return NULL;
+        }
+        if(start>end){
+            return NULL;
+        }
+        int element=preorder[i++];
+        Node* root=new Node(element);
+        int mid=-1;
+        for(int j=start;j<=end;j++){
+            if(inorder[j]==element){
+                mid=j;                                                                                                                       
+            }
+        }
+        if(mid==-1){
+            return NULL;
+        }
+        root->left=build(inorder,preorder,start,mid-1,i);
+        root->right=build(inorder,preorder,mid+1,end,i);
+        
+        return root;
+    }
+  public:
+    Node *buildTree(vector<int> &inorder, vector<int> &preorder) {
+        // code here
+        int i=0;
+        return build(inorder,preorder,0,inorder.size()-1,i);
+    }
+};

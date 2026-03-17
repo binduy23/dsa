@@ -1,0 +1,54 @@
+// https://leetcode.com/problems/n-queens/submissions/1950800372
+
+class Solution {
+private:
+    void include_ans(vector<vector<string>>& ans,vector<vector<string>>& board,int n){
+        vector<string> temp;
+        for(int i=0;i<n;i++){
+            string s="";
+            for(int j=0;j<n;j++){
+                s+=board[i][j];
+            }
+            temp.push_back(s);
+        }
+        ans.push_back(temp);
+    }
+    bool isSafe(vector<vector<string>>& board,int n,int row,int col){
+        int x=row;
+        for(int i=0;i<col;i++){
+            if(board[x][i]=="Q"){
+                return false;
+            }
+        }
+        for(int i=row-1,j=col-1;i>=0 && j>=0;i--,j--){
+            if(board[i][j]=="Q"){
+                return false;
+            }
+        }
+        for(int i=row+1,j=col-1;i<n && j>=0;i++,j--){
+            if(board[i][j]=="Q"){
+                return false;
+            }
+        }
+        return true;
+    }
+    void solve(vector<vector<string>>& ans,vector<vector<string>>& board,int n,int col){
+        if(col==n){
+            include_ans(ans,board,n);
+        }
+        for(int row=0;row<n;row++){
+            if(isSafe(board,n,row,col)){
+                board[row][col]="Q";
+                solve(ans,board,n,col+1);
+                board[row][col]=".";
+            }
+        }
+    }
+public:
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<vector<string>> board(n,vector<string>(n,"."));
+        solve(ans,board,n,0);
+        return ans;
+    }
+};

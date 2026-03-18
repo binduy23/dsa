@@ -1,0 +1,33 @@
+// https://leetcode.com/problems/relative-ranks/submissions/1952378234
+
+class Solution {
+public:
+    vector<string> findRelativeRanks(vector<int>& score) {
+        int n=score.size();
+        vector<int> arr(n);
+        arr=score;
+        sort(arr.begin(),arr.end());
+        map<int,string> place;
+        int p=4;
+        for(int i=arr.size()-1;i>=0;i--){
+            if(i==arr.size()-1){
+                place[arr[i]]="Gold Medal";
+            }
+            else if(i==arr.size()-2){
+                place[arr[i]]="Silver Medal";
+            }
+            else if(i==arr.size()-3){
+                place[arr[i]]="Bronze Medal";
+            }
+            else{
+                place[arr[i]]=to_string(p);
+                p++;
+            }
+        }
+        vector<string> ans;
+        for(int i=0;i<score.size();i++){
+            ans.push_back(place[score[i]]);
+        }
+        return ans;
+    }
+};

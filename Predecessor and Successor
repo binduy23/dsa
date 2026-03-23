@@ -1,0 +1,51 @@
+// https://www.naukri.com/code360/problems/_893049?topList=love-babbar-dsa-sheet-problems&leftPanelTab=0&leftPanelTabValue=SUBMISSION
+
+/*************************************************************
+
+    Following is the Binary Tree node structure
+    class TreeNode
+    {
+    public:
+        int data;
+        TreeNode *left, *right;
+        TreeNode() : data(0), left(NULL), right(NULL) {}
+        TreeNode(int x) : data(x), left(NULL), right(NULL) {}
+        TreeNode(int x, TreeNode *left, TreeNode *right) : data(x), left(left), right(right) {}
+    };
+
+*************************************************************/
+
+pair<int, int> predecessorSuccessor(TreeNode *root, int key)
+{
+    // Write your code here.
+    pair<int,int> ans;
+    TreeNode* temp=root;
+    int pre=-1;
+    int succ=-1;
+    while(temp!=NULL && temp->data!=key){
+        if(key<temp->data){
+            succ=temp->data;
+            temp=temp->left;
+        }
+        else{
+            pre=temp->data;
+            temp=temp->right;
+        }
+    }
+    if(temp==NULL){
+        return make_pair(pre,succ);
+    }
+    TreeNode* left_node=temp->left;
+    while(left_node!=NULL){
+        pre=left_node->data;
+        left_node=left_node->right;
+    }
+    temp=temp->right;
+    while(temp!=NULL){
+        succ=temp->data;
+        temp=temp->left;
+    }
+    ans.first=pre;
+    ans.second=succ;
+    return ans;
+}

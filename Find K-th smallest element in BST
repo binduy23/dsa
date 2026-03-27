@@ -1,0 +1,43 @@
+// https://www.naukri.com/code360/problems/find-k-th-smallest-element-in-bst_1069333?leftPanelTab=0&leftPanelTabValue=SUBMISSION
+
+#include <bits/stdc++.h> 
+/*************************************************************
+ 
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode 
+    {
+    public : 
+        T data;
+        BinaryTreeNode<T> *left;
+        BinaryTreeNode<T> *right;
+
+        BinaryTreeNode(T data) {
+            this -> data = data;
+            left = NULL;
+            right = NULL;
+        }
+    };
+
+*************************************************************/
+void solve(BinaryTreeNode<int>* root, int k,int &ans,int &i){
+    if(root==NULL){
+        return;
+    }
+    solve(root->left,k,ans,i);
+    i++;
+    if(i==k){
+        if(ans==-1){
+            ans=root->data;
+        }
+    }
+    solve(root->right,k,ans,i);
+}
+int kthSmallest(BinaryTreeNode<int>* root, int k) {
+    // Write your code here.
+    int ans=-1;
+    int i=0;
+    solve(root,k,ans,i);
+    return ans;
+
+}

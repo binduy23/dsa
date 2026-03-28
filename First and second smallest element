@@ -1,0 +1,27 @@
+// https://www.geeksforgeeks.org/problems/find-the-smallest-and-second-smallest-element-in-an-array3226/1
+
+class Solution {
+  public:
+    vector<int> minAnd2ndMin(vector<int> &arr) {
+        // code here
+        vector<int> ans;
+        ans.push_back(-1);
+        if(arr.size()<2){
+            return ans;
+        }
+        sort(arr.begin(),arr.end());
+        int first=arr[0];
+        int i=0;
+        while(i<arr.size() && arr[i]==first){
+            i++;
+        }
+        int second=0;
+        if(i<arr.size()){
+            second=arr[i];
+            ans.pop_back();
+            ans.push_back(first);
+            ans.push_back(second);
+        }
+        return ans;
+    }
+};

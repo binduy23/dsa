@@ -1,0 +1,25 @@
+// https://leetcode.com/contest/weekly-contest-497/problems/angles-of-a-triangle/submissions/1976041321/
+
+class Solution {
+private:
+    bool checkTriangle(vector<int>& sides){
+        if(sides[0]+sides[1]<=sides[2] || sides[0]+sides[2]<=sides[1] || sides[2]+sides[1]<=sides[0]){
+            return false;
+        }
+        return true;
+    }
+public:
+    vector<double> internalAngles(vector<int>& sides) {
+        vector<double> ans;
+        if(checkTriangle(sides)){
+            double a=acos((pow(sides[1],2)+pow(sides[2],2)-pow(sides[0],2))/(2*sides[1]*sides[2]))* 180.0 / M_PI;
+            double b=acos((pow(sides[0],2)+pow(sides[2],2)-pow(sides[1],2))/(2*sides[0]*sides[2]))* 180.0 / M_PI;
+            double c=acos((pow(sides[1],2)+pow(sides[0],2)-pow(sides[2],2))/(2*sides[1]*sides[0]))* 180.0 / M_PI;
+            ans.push_back(a);
+            ans.push_back(b);
+            ans.push_back(c);
+        }
+        sort(ans.begin(),ans.end());
+        return ans;
+    }
+};©leetcode
